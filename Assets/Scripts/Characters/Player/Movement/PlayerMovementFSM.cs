@@ -1,17 +1,14 @@
 using UnityEngine;
 
 public class PlayerMovementFSM : FSM
-{
-    // 待机状态
-    public PlayerIdleState IdleState { get; }
+{    
+    private PlayerControl _player;
     
-    // 移动状态
+    public PlayerIdleState IdleState { get; }
     public PlayerWalkState WalkState { get; }
     public PlayerRunState RunState { get; }
     public PlayerSprintState SprintState { get; }
-
-    private PlayerControl _player;
-
+    
     public PlayerMovementFSM(PlayerControl playerControl)
     {
         _player = playerControl;

@@ -892,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969297246}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1228,6 +1228,7 @@ GameObject:
   - component: {fileID: 1297548164}
   - component: {fileID: 1297548165}
   - component: {fileID: 1297548166}
+  - component: {fileID: 1297548168}
   - component: {fileID: 1297548167}
   m_Layer: 0
   m_Name: Player
@@ -1339,7 +1340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
   m_Actions: {fileID: -944628639613478452, guid: dabca629575d0884fa8a953e186d7f8c, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -1372,12 +1373,28 @@ MonoBehaviour:
     rb: {fileID: 0}
     animator: {fileID: 0}
     camera: {fileID: 0}
+    input: {fileID: 0}
+    walkSpeed: 3
+    runSpeed: 7
+    sprintSpeed: 10
+    rotationSpeed: 10
     orientation: {fileID: 969297247}
     moveDirection: {x: 0, y: 0, z: 0}
     targetSpeed: 0
     currentSpeed: 0
-    rotationSpeed: 10
-    canMove: 1
+    shouldWalk: 0
+--- !u!114 &1297548168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297548160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca84f1d02c7df24c994398cef8ab511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleInput
 --- !u!1 &1776903384
 GameObject:
   m_ObjectHideFlags: 0

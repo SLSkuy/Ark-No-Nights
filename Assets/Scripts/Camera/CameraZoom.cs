@@ -30,6 +30,9 @@ public class CameraZoom : MonoBehaviour
         Zoom();
     }
 
+    /// <summary>
+    /// 摄像机z轴缩放
+    /// </summary>
     private void Zoom()
     {
         float zoomValue = _inputProvider.GetAxisValue(2) * zoomSensitivity;

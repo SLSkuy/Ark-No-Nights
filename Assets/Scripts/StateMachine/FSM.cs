@@ -16,6 +16,11 @@ public abstract class FSM
         currentState?.Update();
     }
 
+    public void HandleInput()
+    {
+        currentState?.HandleInput();
+    }
+
     public void FixedUpdate()
     {
         currentState?.FixedUpdate();
