@@ -1,29 +1,8 @@
 using UnityEngine;
 
-public class PlayerIdleState : IState
+public class PlayerIdleState : PlayerMovementState
 {
-    public void Enter()
+    public PlayerIdleState(PlayerControl player) : base(player)
     {
-        Debug.Log(this.GetType().Name + " entered");
-    }
-
-    public void Exit()
-    {
-
-    }
-
-    public void HandleInput()
-    {
-
-    }
-
-    public void Update()
-    {
-
-    }
-
-    public void FixedUpdate()
-    {
-
     }
 }

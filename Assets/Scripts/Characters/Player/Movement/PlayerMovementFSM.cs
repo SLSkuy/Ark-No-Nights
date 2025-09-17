@@ -16,9 +16,9 @@ public class PlayerMovementFSM : FSM
     {
         _player = playerControl;
         
-        IdleState = new PlayerIdleState();
-        WalkState = new PlayerWalkState();
-        RunState = new PlayerRunState();
-        SprintState = new PlayerSprintState();
+        IdleState = new PlayerIdleState(_player);
+        WalkState = new PlayerWalkState(_player);
+        RunState = new PlayerRunState(_player);
+        SprintState = new PlayerSprintState(_player);
     }
 }

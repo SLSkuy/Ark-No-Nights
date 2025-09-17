@@ -1,29 +1,8 @@
 using UnityEngine;
 
-public class PlayerWalkState : IState
+public class PlayerWalkState : PlayerMovementState
 {
-    public void Enter()
+    public PlayerWalkState(PlayerControl fsm) : base(fsm)
     {
-        Debug.Log(this.GetType().Name + " entered");
-    }
-
-    public void Exit()
-    {
-
-    }
-
-    public void HandleInput()
-    {
-
-    }
-
-    public void Update()
-    {
-
-    }
-
-    public void FixedUpdate()
-    {
-
     }
 }

@@ -10,12 +10,7 @@ public abstract class FSM
         currentState = newState;
         currentState.Enter();
     }
-
-    public void HandleInput()
-    {
-        currentState?.HandleInput();
-    }
-
+    
     public void Update()
     {
         currentState?.Update();
@@ -24,5 +19,10 @@ public abstract class FSM
     public void FixedUpdate()
     {
         currentState?.FixedUpdate();
+    }
+
+    public void OnAnimatorMove()
+    {
+        currentState?.OnAnimatorMove();
     }
 }
