@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Contour
-  m_Shader: {fileID: -6465566751694194690, guid: 10d790efb8a9e834991e3e1971fae4e5, type: 3}
+  m_Name: LimitZone
+  m_Shader: {fileID: -6465566751694194690, guid: d2fc6d1d4b30781439a0939a372b61c6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,8 +25,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 654eec64d56ceae4a9fec3f9b011d37a, type: 3}
+        m_Scale: {x: 3, y: 3}
+        m_Offset: {x: 0, y: 0}
+    - _ScanTexture:
+        m_Texture: {fileID: 2800000, guid: 1c7e9d3bcd013474ba48532c5e4c65ff, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
@@ -42,21 +46,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LineSpace: 1
-    - _LineWidth: 0.3
-    - _MaxDistance: 2
-    - _MaxHeight: 150
+    - _EmissionIntensity: 1.2
+    - _MaxDistance: 3
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SpaceOffset: 0.05
-    - _UVOffset: 0
-    - _UVOffsetStrength: 1
+    - _ScanSpeed: 0.05
+    - _ScanStrength: 0.01
+    - _ScrollSpeed: 0.05
     m_Colors:
-    - _MainColor: {r: 0, g: 1, b: 0.96878785, a: 1}
-    - _ProtagonistPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _MainColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
+    - _PlayerPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayertPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &2680470265981402857
+--- !u!114 &249736658945461954
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
