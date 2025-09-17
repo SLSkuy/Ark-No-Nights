@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LimitZoneCheck : MonoBehaviour
 {
+    public Transform playerPosition;
+    
     [SerializeField] private Material _edgeMaterial;
     private MeshRenderer _edgeMeshRenderer;
 
@@ -19,10 +21,9 @@ public class LimitZoneCheck : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerMovement.Instance)
+        if (playerPosition)
         {
-            _edgeMaterial.SetVector(player, PlayerMovement.Instance.transform.position);
+            _edgeMaterial.SetVector(player, playerPosition.position);
         }
-
     }
 }

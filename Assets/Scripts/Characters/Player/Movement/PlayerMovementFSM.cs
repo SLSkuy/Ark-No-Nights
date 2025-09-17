@@ -10,10 +10,13 @@ public class PlayerMovementFSM : FSM
     public PlayerRunState RunState { get; }
     public PlayerSprintState SprintState { get; }
 
-    public PlayerMovementFSM()
+    private PlayerControl _player;
+
+    public PlayerMovementFSM(PlayerControl playerControl)
     {
-        IdleState = new PlayerIdleState();
+        _player = playerControl;
         
+        IdleState = new PlayerIdleState();
         WalkState = new PlayerWalkState();
         RunState = new PlayerRunState();
         SprintState = new PlayerSprintState();
