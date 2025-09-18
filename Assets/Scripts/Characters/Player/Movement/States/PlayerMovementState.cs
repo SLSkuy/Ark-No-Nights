@@ -38,7 +38,7 @@ public class PlayerMovementState : IState
 
     public virtual void FixedUpdate()
     {
-
+        BasicRotate();
     }
 
     public virtual void OnAnimatorMove()
@@ -75,6 +75,17 @@ public class PlayerMovementState : IState
     }
 
     /// <summary>
+    /// 根据输入方向和角色朝向返回移动朝向
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetFixedDirection()
+    {
+        Vector3 fixedDirection = _board.moveDirection.x * _board.orientation.right + _board.moveDirection.z * _board.orientation.forward;
+        fixedDirection.Normalize();
+        return fixedDirection;
+    }
+    
+    /// <summary>
     /// 速度控制函数，使当前速度插值变换到目标速度
     /// </summary>
     private void SpeedControl()
@@ -90,20 +101,16 @@ public class PlayerMovementState : IState
     }
 
     /// <summary>
-    /// 人物基础移动功能
-    /// 以Animator中的动画速度作为移动速度
+    /// 人物朝向旋转到当前移动朝向
     /// </summary>
-    private void BasicMove()
+    private void BasicRotate()
     {
         if (_board.moveDirection == Vector3.zero || _board.targetSpeed == 0)
         {
-            _board.currentSpeed = 0f;
             return;
         }
         
-        // 根据输入与角色朝向计算移动方向
-        Vector3 fixedDirection = _board.moveDirection.x * _board.orientation.right + _board.moveDirection.z * _board.orientation.forward;
-        fixedDirection.Normalize();
+        Vector3 fixedDirection = GetFixedDirection();
         
         // 旋转模型到当前移动方向
         Quaternion targetRotation = Quaternion.LookRotation(fixedDirection);
@@ -116,11 +123,21 @@ public class PlayerMovementState : IState
         if (Quaternion.Angle(_board.rb.rotation, targetRotation) < 0.5f)
             newRotation = targetRotation;
         _board.rb.MoveRotation(newRotation);
+    }
+    
+    /// <summary>
+    /// 人物基础移动功能
+    /// 以Animator中的动画偏移作为移动位移
+    /// </summary>
+    private void BasicMove()
+    {
+        if (_board.moveDirection == Vector3.zero || _board.targetSpeed == 0)
+        {
+            _board.currentSpeed = 0f;
+            return;
+        }
         
-        // 添加速度
-        Vector3 targetVelocity = fixedDirection * _board.animator.velocity.magnitude;
-        Vector3 fixedVelocity = new Vector3(targetVelocity.x, _board.rb.linearVelocity.y, targetVelocity.z);
-        _board.rb.linearVelocity = fixedVelocity;
+        _board.player.transform.position += _board.animator.deltaPosition;
     }
 
     /// <summary>
