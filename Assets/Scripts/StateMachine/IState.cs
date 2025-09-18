@@ -6,4 +6,7 @@ public interface IState
     public void Update();
     public void FixedUpdate();
     public void OnAnimatorMove();
+    public void OnAnimationEnterEvent();
+    public void OnAnimationExitEvent();
+    public void OnAnimationTransitionEvent();
 }

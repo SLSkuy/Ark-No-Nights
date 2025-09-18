@@ -57,4 +57,19 @@ public abstract class FSM
     {
         _currentState?.OnAnimatorMove();
     }
+
+    public void OnAnimationEnterEvent()
+    {
+        _currentState?.OnAnimationEnterEvent();
+    }
+
+    public void OnAnimationExitEvent()
+    {
+        _currentState?.OnAnimationExitEvent();
+    }
+    
+    public void OnAnimationTransitionEvent()
+    {
+        _currentState?.OnAnimationTransitionEvent();
+    }
 }

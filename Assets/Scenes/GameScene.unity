@@ -1374,10 +1374,12 @@ MonoBehaviour:
     animator: {fileID: 0}
     camera: {fileID: 0}
     input: {fileID: 0}
+    player: {fileID: 0}
     walkSpeed: 3
     runSpeed: 7
     sprintSpeed: 10
-    rotationSpeed: 10
+    dashSpeed: 15
+    rotationSpeed: 180
     orientation: {fileID: 969297247}
     moveDirection: {x: 0, y: 0, z: 0}
     targetSpeed: 0

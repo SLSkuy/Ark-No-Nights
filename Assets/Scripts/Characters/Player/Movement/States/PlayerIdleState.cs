@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerIdleState : PlayerMovementState
+public class PlayerIdleState : PlayerGroundedState
 {
     public PlayerIdleState(PlayerMovementFSM fsm) : base(fsm)
     {

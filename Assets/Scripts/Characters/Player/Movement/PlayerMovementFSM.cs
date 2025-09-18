@@ -8,10 +8,12 @@ public class PlayerMovementFSM : FSM
         var walkState = new PlayerWalkState(this);
         var runState = new PlayerRunState(this);
         var sprintState = new PlayerSprintState(this);
+        var dashState = new PlayerDashState(this);
         
         AddState(PlayerStates.Idle,idleState);
         AddState(PlayerStates.Walking, walkState);
         AddState(PlayerStates.Running, runState);
         AddState(PlayerStates.Sprinting, sprintState);
+        AddState(PlayerStates.Dashing, dashState);
     }
 }

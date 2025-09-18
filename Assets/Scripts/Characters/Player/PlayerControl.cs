@@ -27,11 +27,14 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        // 测试使用
-        board.orientation.transform.eulerAngles = new Vector3(0,board.camera.transform.eulerAngles.y,0);
-        
         _movementFsm.HandleInput();
         _movementFsm.Update();
+    }
+
+    private void LateUpdate()
+    {
+        // 测试使用
+        board.orientation.transform.eulerAngles = new Vector3(0,board.camera.transform.eulerAngles.y,0);
     }
 
     private void FixedUpdate()

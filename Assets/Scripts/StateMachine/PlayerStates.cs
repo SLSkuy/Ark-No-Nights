@@ -4,4 +4,5 @@ public enum PlayerStates
     Walking,
     Running,
     Sprinting,
+    Dashing
 }

@@ -13,6 +13,7 @@ public class PlayerRunState : PlayerGroundedState
     {
         base.Enter();
         
+        _board.shouldWalk = false;
         _board.targetSpeed = _board.runSpeed;
     }
     

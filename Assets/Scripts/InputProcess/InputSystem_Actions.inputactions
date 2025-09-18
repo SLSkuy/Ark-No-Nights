@@ -21,7 +21,7 @@
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold(duration=1.401298E-45)",
                     "initialStateCheck": false
                 },
                 {
@@ -55,6 +55,15 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "9e64e831-4e27-453a-8836-f6a40f603e50",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "ffb7878e-5044-4ae2-828e-5feb0245d3e2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -266,8 +275,19 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "315a3279-c8e9-4aca-bf42-054206b41deb",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

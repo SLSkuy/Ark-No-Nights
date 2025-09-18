@@ -45,7 +45,22 @@ public class PlayerMovementState : IState
     {
         BasicMove();
     }
-    
+
+    public virtual void OnAnimationEnterEvent()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public virtual void OnAnimationExitEvent()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public virtual void OnAnimationTransitionEvent()
+    {
+        
+    }
+
     #endregion
 
     #region Main Methods
@@ -90,9 +105,18 @@ public class PlayerMovementState : IState
         Vector3 fixedDirection = _board.moveDirection.x * _board.orientation.right + _board.moveDirection.z * _board.orientation.forward;
         fixedDirection.Normalize();
         
-        // 旋转模型朝向
-        _board.player.forward = Vector3.Slerp(_board.player.forward, fixedDirection, Time.deltaTime * _board.rotationSpeed);
-
+        // 旋转模型到当前移动方向
+        Quaternion targetRotation = Quaternion.LookRotation(fixedDirection);
+        Quaternion newRotation = Quaternion.RotateTowards(
+            _board.rb.rotation,
+            targetRotation,
+            _board.rotationSpeed * Time.fixedDeltaTime
+        );
+        // 增加收敛速度避免抽动
+        if (Quaternion.Angle(_board.rb.rotation, targetRotation) < 0.5f)
+            newRotation = targetRotation;
+        _board.rb.MoveRotation(newRotation);
+        
         // 添加速度
         Vector3 targetVelocity = fixedDirection * _board.animator.velocity.magnitude;
         Vector3 fixedVelocity = new Vector3(targetVelocity.x, _board.rb.linearVelocity.y, targetVelocity.z);

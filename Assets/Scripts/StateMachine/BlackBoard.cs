@@ -16,6 +16,7 @@ public class BlackBoard
     public float walkSpeed;
     public float runSpeed;
     public float sprintSpeed;
+    public float dashSpeed;
     public float rotationSpeed = 10f;
     
     // 移动信息
