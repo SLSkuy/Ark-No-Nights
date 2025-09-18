@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerWalkState : PlayerMovementState
+public class PlayerWalkState : PlayerGroundedState
 {
-    public PlayerWalkState(PlayerControl fsm) : base(fsm)
+    public PlayerWalkState(PlayerMovementFSM fsm) : base(fsm)
     {
     }
 
@@ -24,32 +24,8 @@ public class PlayerWalkState : PlayerMovementState
     {
         base.OnSwitchWalkState(context);
         
-        _player.movementFSM.ChangeState(_player.movementFSM.RunState);
-    }
-
-    protected void OnMovementCanceled(InputAction.CallbackContext context)
-    {
-        _player.movementFSM.ChangeState(_player.movementFSM.IdleState);
+        _fsm.SwitchState(PlayerStates.Running);
     }
     
     #endregion
-
-    #region Input Actions
-    
-    protected override void AddInputActionsCallbacks()
-    {
-        base.AddInputActionsCallbacks();
-        
-        _board.input.PlayerActions.Move.canceled += OnMovementCanceled;
-    }
-    
-    protected override void RemoveInputActionsCallbacks()
-    {
-        base.RemoveInputActionsCallbacks();
-        
-        _board.input.PlayerActions.Move.canceled -= OnMovementCanceled;
-    }
-    
-    #endregion
-
 }

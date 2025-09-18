@@ -9,6 +9,7 @@ public class BlackBoard
     [HideInInspector] public Animator animator;
     [HideInInspector] public Transform camera;
     [HideInInspector] public HandleInput input;
+    [HideInInspector] public Transform player;
 
     // 移动属性
     [Header("Movement Attributes")]

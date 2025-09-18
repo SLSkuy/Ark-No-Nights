@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerMovementState
 {
-    public PlayerIdleState(PlayerControl player) : base(player)
+    public PlayerIdleState(PlayerMovementFSM fsm) : base(fsm)
     {
     }
 
@@ -34,13 +34,12 @@ public class PlayerIdleState : PlayerMovementState
 
     private void OnMove()
     {
-        PlayerMovementFSM fsm = _player.movementFSM;
         if (_board.shouldWalk)
         {
-            fsm.ChangeState(fsm.WalkState);
+            _fsm.SwitchState(PlayerStates.Walking);
             return;
         }
-        fsm.ChangeState(fsm.RunState);
+        _fsm.SwitchState(PlayerStates.Running);
     }
 
     #endregion

@@ -5,25 +5,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(HandleInput))]
 public class PlayerControl : MonoBehaviour
 {
-    // 组件获取
+    // 角色属性
     public BlackBoard board;
-    
-    // 有限状态机
-    public PlayerMovementFSM movementFSM;
+    private PlayerMovementFSM _movementFsm;
 
     private void Awake()
     {
         board.rb = GetComponent<Rigidbody>();
         board.animator = GetComponent<Animator>();
         board.input = GetComponent<HandleInput>();
+        board.player = GetComponent<Transform>();
         
-        movementFSM = new PlayerMovementFSM(this);
+        _movementFsm = new PlayerMovementFSM(board);
         board.camera = Camera.main.transform;
     }
 
     private void Start()
     {
-        movementFSM.ChangeState(movementFSM.IdleState);
+        _movementFsm.SwitchState(PlayerStates.Idle);
     }
 
     private void Update()
@@ -31,17 +30,17 @@ public class PlayerControl : MonoBehaviour
         // 测试使用
         board.orientation.transform.eulerAngles = new Vector3(0,board.camera.transform.eulerAngles.y,0);
         
-        movementFSM.HandleInput();
-        movementFSM.Update();
+        _movementFsm.HandleInput();
+        _movementFsm.Update();
     }
 
     private void FixedUpdate()
     {
-        movementFSM.FixedUpdate();
+        _movementFsm.FixedUpdate();
     }
 
     private void OnAnimatorMove()
     {
-        movementFSM.OnAnimatorMove();
+        _movementFsm.OnAnimatorMove();
     }
 }

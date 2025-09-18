@@ -3,13 +3,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementState : IState
 {
-    protected PlayerControl _player;
+    protected FSM _fsm;
     protected BlackBoard _board;
 
-    public PlayerMovementState(PlayerControl player)
+    public PlayerMovementState(FSM fsm)
     {
-        _player = player;
-        _board = player.board;
+        _fsm = fsm;
+        _board = fsm.board;
     }
     
     #region IState Members
@@ -28,20 +28,12 @@ public class PlayerMovementState : IState
 
     public virtual void HandleInput()
     {
-        // 获取输入方向
-        Vector2 movement = _board.input.PlayerActions.Move.ReadValue<Vector2>();
-        _board.moveDirection = new Vector3(movement.x, 0, movement.y);
+        GetInputDirection();
     }
 
     public virtual void Update()
     {
-        float curSpeed = _board.currentSpeed;
-        float targetSpeed = _board.targetSpeed;
-        // 当前速度递增到目标速度
-        curSpeed = Mathf.Abs(curSpeed - targetSpeed) > 0.01f ? 
-            Mathf.Lerp(curSpeed, targetSpeed, 0.1f) : targetSpeed;
-        _board.animator.SetFloat("Speed", curSpeed);
-        _board.currentSpeed = curSpeed;
+        SpeedControl();
     }
 
     public virtual void FixedUpdate()
@@ -57,6 +49,30 @@ public class PlayerMovementState : IState
     #endregion
 
     #region Main Methods
+
+    /// <summary>
+    /// 更新输入方向
+    /// </summary>
+    private void GetInputDirection()
+    {
+        Vector2 movement = _board.input.PlayerActions.Move.ReadValue<Vector2>();
+        _board.moveDirection = new Vector3(movement.x, 0, movement.y);
+    }
+
+    /// <summary>
+    /// 速度控制函数，使当前速度插值变换到目标速度
+    /// </summary>
+    private void SpeedControl()
+    {
+        float curSpeed = _board.currentSpeed;
+        float targetSpeed = _board.targetSpeed;
+        
+        // 当前速度递增到目标速度
+        curSpeed = Mathf.Abs(curSpeed - targetSpeed) > 0.01f ? 
+            Mathf.Lerp(curSpeed, targetSpeed, 0.1f) : targetSpeed;
+        _board.animator.SetFloat("Speed", curSpeed);
+        _board.currentSpeed = curSpeed;
+    }
 
     /// <summary>
     /// 人物基础移动功能
@@ -75,7 +91,7 @@ public class PlayerMovementState : IState
         fixedDirection.Normalize();
         
         // 旋转模型朝向
-        _player.transform.forward = Vector3.Slerp(_player.transform.forward, fixedDirection, Time.deltaTime * _board.rotationSpeed);
+        _board.player.forward = Vector3.Slerp(_board.player.forward, fixedDirection, Time.deltaTime * _board.rotationSpeed);
 
         // 添加速度
         Vector3 targetVelocity = fixedDirection * _board.animator.velocity.magnitude;
@@ -104,11 +120,17 @@ public class PlayerMovementState : IState
     
     #region Input Actions
     
+    /// <summary>
+    /// 添加回调函数，用于检测输入事件触发
+    /// </summary>
     protected virtual void AddInputActionsCallbacks()
     {
         _board.input.PlayerActions.SwitchMoveState.started += OnSwitchWalkState;
     }
     
+    /// <summary>
+    /// 删除回调函数，删除非当前状态的输入事件检测
+    /// </summary>
     protected virtual void RemoveInputActionsCallbacks()
     {
         _board.input.PlayerActions.SwitchMoveState.started -= OnSwitchWalkState;
