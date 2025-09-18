@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerSprintState : PlayerGroundedState
 {
     private bool _keepSprinting;
-    private float _startTime;
-    private readonly float _sprintToRunTime = 0.45f;
     
     public PlayerSprintState(PlayerMovementFSM fsm) : base(fsm)
     {
@@ -18,14 +16,7 @@ public class PlayerSprintState : PlayerGroundedState
         base.Enter();
         
         _board.targetSpeed = _board.sprintSpeed;
-        _startTime = Time.time;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        _keepSprinting = false;
+        _keepSprinting = true;
     }
 
     public override void Update()
@@ -33,9 +24,7 @@ public class PlayerSprintState : PlayerGroundedState
         base.Update();
 
         if (_keepSprinting) return;
-
-        if (Time.time - _startTime < _sprintToRunTime) return;
-
+        
         StopSprinting();
     }
 
@@ -47,7 +36,7 @@ public class PlayerSprintState : PlayerGroundedState
     {
         if (_board.moveDirection == Vector3.zero)
         {
-            _fsm.SwitchState(PlayerStates.Idle);
+            _fsm.SwitchState(PlayerStates.HardStop);
         }
         else
         {
@@ -55,11 +44,6 @@ public class PlayerSprintState : PlayerGroundedState
         }
     }
     
-    private void OnSprintPerformed(InputAction.CallbackContext obj)
-    {
-        _keepSprinting = true;
-    }
-
     private void OnSprintCancelled(InputAction.CallbackContext obj)
     {
         _keepSprinting = false;
@@ -72,8 +56,7 @@ public class PlayerSprintState : PlayerGroundedState
     protected override void AddInputActionsCallbacks()
     {
         base.AddInputActionsCallbacks();
-
-        _board.input.PlayerActions.Sprint.performed += OnSprintPerformed;
+        
         _board.input.PlayerActions.Sprint.canceled += OnSprintCancelled;
     }
     
@@ -81,7 +64,6 @@ public class PlayerSprintState : PlayerGroundedState
     {
         base.RemoveInputActionsCallbacks();
         
-        _board.input.PlayerActions.Sprint.performed -= OnSprintPerformed;
         _board.input.PlayerActions.Sprint.canceled -= OnSprintCancelled;
     }
     

@@ -19,7 +19,12 @@ public class PlayerWalkState : PlayerGroundedState
     #endregion
     
     #region Main Methods
-    
+
+    protected override void OnMovementCanceled(InputAction.CallbackContext context)
+    {
+        _fsm.SwitchState(PlayerStates.LightStop);
+    }
+
     protected override void OnSwitchWalkState(InputAction.CallbackContext context)
     {
         base.OnSwitchWalkState(context);

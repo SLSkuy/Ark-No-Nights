@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour
     {
         _movementFsm.SwitchState(PlayerStates.Idle);
     }
-
+    
     private void Update()
     {
         _movementFsm.HandleInput();
@@ -45,5 +45,10 @@ public class PlayerControl : MonoBehaviour
     private void OnAnimatorMove()
     {
         _movementFsm.OnAnimatorMove();
+    }
+
+    public void OnAnimationTransitionEvent()
+    {
+        _movementFsm.OnAnimationTransitionEvent();
     }
 }

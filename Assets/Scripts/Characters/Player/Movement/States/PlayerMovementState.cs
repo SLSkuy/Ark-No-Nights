@@ -48,12 +48,12 @@ public class PlayerMovementState : IState
 
     public virtual void OnAnimationEnterEvent()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public virtual void OnAnimationExitEvent()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public virtual void OnAnimationTransitionEvent()
@@ -105,7 +105,7 @@ public class PlayerMovementState : IState
     /// </summary>
     private void BasicRotate()
     {
-        if (_board.moveDirection == Vector3.zero || _board.targetSpeed == 0)
+        if (_board.moveDirection == Vector3.zero)
         {
             return;
         }
