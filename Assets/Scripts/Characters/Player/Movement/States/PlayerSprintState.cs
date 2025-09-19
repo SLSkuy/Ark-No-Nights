@@ -43,7 +43,12 @@ public class PlayerSprintState : PlayerGroundedState
             _fsm.SwitchState(PlayerStates.Running);
         }
     }
-    
+
+    protected override void OnMovementCanceled(InputAction.CallbackContext context)
+    {
+        _keepSprinting = false;
+    }
+
     private void OnSprintCancelled(InputAction.CallbackContext obj)
     {
         _keepSprinting = false;
