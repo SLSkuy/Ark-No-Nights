@@ -18,17 +18,21 @@ public class PlayerGroundedState : PlayerMovementState
         _fsm.SwitchState(PlayerStates.Idle);
     }
     
-    #endregion
-    
     /// <summary>
     /// 冲刺状态转换
     /// </summary>
-    /// <param name="obj">InputSystem回调参数</param>
-    private void OnDashStarted(InputAction.CallbackContext obj)
+    /// <param name="context">InputSystem回调参数</param>
+    private void OnDashStarted(InputAction.CallbackContext context)
     {
         _fsm.SwitchState(PlayerStates.Dashing);
     }
 
+    protected virtual void OnJumpStarted(InputAction.CallbackContext context)
+    {
+        _fsm.SwitchState(PlayerStates.Jumping);
+    }
+    
+    #endregion
     
     #region Input Actions
     
@@ -38,6 +42,7 @@ public class PlayerGroundedState : PlayerMovementState
         
         _board.input.PlayerActions.Move.canceled += OnMovementCanceled;
         _board.input.PlayerActions.Dash.started += OnDashStarted;
+        _board.input.PlayerActions.Jump.started += OnJumpStarted;
     }
     
     protected override void RemoveInputActionsCallbacks()
@@ -46,6 +51,7 @@ public class PlayerGroundedState : PlayerMovementState
         
         _board.input.PlayerActions.Move.canceled -= OnMovementCanceled;
         _board.input.PlayerActions.Dash.started -= OnDashStarted;
+        _board.input.PlayerActions.Jump.started -= OnJumpStarted;
     }
     
     #endregion

@@ -18,6 +18,7 @@ public class BlackBoard
     public float sprintSpeed;
     public float dashSpeed;
     public float rotationSpeed = 10f;
+    public float jumpForce;
     
     // 移动信息
     [Header("Debug Info")]

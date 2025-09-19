@@ -5,6 +5,7 @@ public enum PlayerStates
     Running,
     Sprinting,
     Dashing,
+    Jumping,
     LightStop,
     MediumStop,
     HardStop,

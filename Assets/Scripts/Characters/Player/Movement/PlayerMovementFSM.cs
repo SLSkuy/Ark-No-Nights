@@ -12,6 +12,7 @@ public class PlayerMovementFSM : FSM
         var lightStop = new PlayerLightStopState(this);
         var mediumStop = new PlayerMediumStopState(this);
         var hardStop = new PlayerHardStopState(this);
+        var jumpState = new PlayerJumpState(this);
         
         AddState(PlayerStates.Idle,idleState);
         AddState(PlayerStates.Walking, walkState);
@@ -21,5 +22,6 @@ public class PlayerMovementFSM : FSM
         AddState(PlayerStates.LightStop, lightStop);
         AddState(PlayerStates.MediumStop, mediumStop);
         AddState(PlayerStates.HardStop, hardStop);
+        AddState(PlayerStates.Jumping, jumpState);
     }
 }
