@@ -11,16 +11,20 @@ public class PlayerJumpState : PlayerAirborneState
     public override void Enter()
     {
         base.Enter();
-
-        _board.targetSpeed = 0f;
+        
         _board.animator.SetTrigger("Jump");
-    }
 
-    public override void Update()
+        StartJump();
+    }
+    
+    #endregion
+    
+    #region Main Methods
+    
+    private void StartJump()
     {
         _board.rb.AddForce(_board.player.up * 5, ForceMode.Impulse);
-        _fsm.SwitchState(PlayerStates.Running);
     }
-
+    
     #endregion
 }

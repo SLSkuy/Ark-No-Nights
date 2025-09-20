@@ -11,15 +11,16 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        
         _board.targetSpeed = 0f;
+        _board.currentSpeed = 0f;
+        _board.rotationSpeed = 360f;
         
         ResetVelocity();
     }
 
     public override void Update()
     {
-        base.Update();
-
         if (_board.moveDirection == Vector3.zero)
         {
             return;

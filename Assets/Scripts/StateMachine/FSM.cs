@@ -72,4 +72,14 @@ public abstract class FSM
     {
         _currentState?.OnAnimationTransitionEvent();
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        _currentState?.OnTriggerEnter(other);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        _currentState?.OnTriggerExit(other);
+    }
 }

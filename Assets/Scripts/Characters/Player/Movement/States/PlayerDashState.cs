@@ -47,12 +47,15 @@ public class PlayerDashState : PlayerGroundedState
     
     private void DashMovement()
     {
-        _board.player.transform.position += _board.animator.deltaPosition;
+        Vector3 fixedVelocity = new  Vector3(_board.player.forward.x,0,_board.player.forward.z).normalized
+                                * _board.animator.velocity.magnitude;
+        fixedVelocity.y = _board.rb.linearVelocity.y;
+        _board.rb.linearVelocity = fixedVelocity;
     }
 
     protected override void OnMovementCanceled(InputAction.CallbackContext context)
     {
-        // 保持当前状态不受影响
+        // 保持当前状态不受影响，进入停止状态
     }
     
     private void StartDash()

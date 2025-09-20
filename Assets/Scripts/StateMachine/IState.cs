@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IState
 {
     public void Enter();
@@ -9,4 +11,6 @@ public interface IState
     public void OnAnimationEnterEvent();
     public void OnAnimationExitEvent();
     public void OnAnimationTransitionEvent();
+    public void OnTriggerEnter(Collider other);
+    public void OnTriggerExit(Collider other);
 }

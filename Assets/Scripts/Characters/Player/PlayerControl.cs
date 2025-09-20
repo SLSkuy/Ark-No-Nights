@@ -51,4 +51,14 @@ public class PlayerControl : MonoBehaviour
     {
         _movementFsm.OnAnimationTransitionEvent();
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        _movementFsm.OnTriggerEnter(other);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        _movementFsm.OnTriggerExit(other);
+    }
 }

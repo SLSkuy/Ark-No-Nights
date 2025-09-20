@@ -61,9 +61,28 @@ public class PlayerMovementState : IState
         
     }
 
+    public virtual void OnTriggerEnter(Collider other)
+    {
+        OnContactWithGround(other);
+    }
+
+    public virtual void OnTriggerExit(Collider other)
+    {
+        
+    }
+
     #endregion
 
     #region Main Methods
+    
+    /// <summary>
+    /// 与地面接触时调用
+    /// </summary>
+    /// <param name="other"></param>
+    protected virtual void OnContactWithGround(Collider other)
+    {
+        // 触地
+    }
 
     /// <summary>
     /// 更新输入方向
@@ -137,7 +156,11 @@ public class PlayerMovementState : IState
             return;
         }
         
-        _board.player.transform.position += _board.animator.deltaPosition;
+        // _board.player.transform.position += _board.animator.deltaPosition;
+        Vector3 fixedVelocity = new  Vector3(_board.player.forward.x,0,_board.player.forward.z).normalized
+            * _board.animator.velocity.magnitude;
+        fixedVelocity.y = _board.rb.linearVelocity.y;
+        _board.rb.linearVelocity = fixedVelocity;
     }
 
     /// <summary>
