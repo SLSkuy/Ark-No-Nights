@@ -27,7 +27,15 @@ public class PlayerAirborneState : PlayerMovementState
 
     protected override void OnContactWithGround(Collider other)
     {
-        _fsm.SwitchState(PlayerStates.Idle);
+        _board.animator.SetBool("Ground",true);
+        _board.fallingTriggered = false;
+        
+        if (_board.rb.linearVelocity.y < -_board.rollThreshold)
+        {
+            _fsm.SwitchState(PlayerStates.HardLand);
+            return;
+        }
+        _fsm.SwitchState(PlayerStates.LightLand);
     }
     
     #endregion

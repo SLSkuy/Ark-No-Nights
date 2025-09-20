@@ -13,8 +13,16 @@ public class PlayerJumpState : PlayerAirborneState
         base.Enter();
         
         _board.animator.SetTrigger("Jump");
+        _board.animator.SetBool("Ground",false);
 
         StartJump();
+    }
+
+    public override void OnAnimationTransitionEvent()
+    {
+        // 跳跃动画完成后进入坠落状态
+        _fsm.SwitchState(PlayerStates.Falling);
+        _board.animator.SetTrigger("Falling");
     }
     
     #endregion

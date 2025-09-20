@@ -19,6 +19,8 @@ public class BlackBoard
     public float dashSpeed;
     public float rotationSpeed = 360f;
     public float jumpForce;
+    public float rollThreshold;
+    public float fallingThreshold;
     
     // 移动信息
     [Header("Debug Info")]
@@ -27,4 +29,5 @@ public class BlackBoard
     public float targetSpeed;
     public float currentSpeed;
     public bool shouldWalk = false;
+    public bool fallingTriggered = false;
 }

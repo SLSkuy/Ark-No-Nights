@@ -9,4 +9,7 @@ public enum PlayerStates
     LightStop,
     MediumStop,
     HardStop,
+    LightLand,
+    HardLand,
+    Falling
 }

@@ -34,6 +34,7 @@ public class PlayerMovementState : IState
     public virtual void Update()
     {
         SpeedControl();
+        CheckIsFalling();
     }
 
     public virtual void FixedUpdate()
@@ -74,6 +75,19 @@ public class PlayerMovementState : IState
     #endregion
 
     #region Main Methods
+    
+    /// <summary>
+    /// 检测是否开始坠落
+    /// </summary>
+    private void CheckIsFalling()
+    {
+        if (!_board.fallingTriggered && _board.rb.linearVelocity.y < -_board.fallingThreshold)
+        {
+            _fsm.SwitchState(PlayerStates.Falling);
+            _board.animator.SetBool("Ground",false);
+            _board.fallingTriggered = true;
+        }
+    }
     
     /// <summary>
     /// 与地面接触时调用
@@ -164,11 +178,11 @@ public class PlayerMovementState : IState
     }
 
     /// <summary>
-    /// 重置人物当前除Y轴方向的速度
+    /// 重置人物当前速度
     /// </summary>
     protected void ResetVelocity()
     {
-        _board.rb.linearVelocity = new Vector3(0f, _board.rb.linearVelocity.y, 0f);
+        _board.rb.linearVelocity = Vector3.zero;
     }
 
     /// <summary>

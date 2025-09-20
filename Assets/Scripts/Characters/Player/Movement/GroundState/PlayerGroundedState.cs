@@ -27,7 +27,7 @@ public class PlayerGroundedState : PlayerMovementState
         _fsm.SwitchState(PlayerStates.Dashing);
     }
 
-    protected virtual void OnJumpStarted(InputAction.CallbackContext context)
+    private void OnJumpStarted(InputAction.CallbackContext context)
     {
         _fsm.SwitchState(PlayerStates.Jumping);
     }
